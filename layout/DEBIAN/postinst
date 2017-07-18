@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "Wiping keyboard caches..."
+rm -rf /private/var/mobile/Library/Caches/com.apple.keyboards
+rm -rf /private/var/root/Library/Caches/com.apple.keyboards
+
+echo "IMPORTANT: You MUST install latest emoji font in order to display emoji on your devices correctly, the guide is included as like in the tweak description."
+echo "Done."
