@@ -1,7 +1,5 @@
 #import "../../EmojiLibrary/PSEmojiUtilities.h"
 #import "../../EmojiLibrary/Header.h"
-#import <CoreFoundation/CoreFoundation.h>
-#import <CoreText/CoreText.h>
 #import "../EmojiHUD.h"
 
 %hook UIKeyboardEmoji
@@ -26,15 +24,15 @@
     NSInteger categoryType = [[NSClassFromString(@"UIKeyboardEmojiCategory") categoriesMap] indexOfObject:categoryKey];
     if (categoryType == NSNotFound)
         return nil;
-    UIKeyboardEmojiCategory *categoryForType = [categories objectForKey:categoryKey];
-    if (categoryForType == nil) {
-        categoryForType = [[[NSClassFromString(@"UIKeyboardEmojiCategory") alloc] init] autorelease];
-        [categoryForType setValue:categoryKey forKey:@"_name"];
-        [categories setObject:categoryForType forKey:categoryKey];
+    UIKeyboardEmojiCategory *categoryForKey = [categories objectForKey:categoryKey];
+    if (categoryForKey == nil) {
+        categoryForKey = [[[NSClassFromString(@"UIKeyboardEmojiCategory") alloc] init] autorelease];
+        [categoryForKey setValue:categoryKey forKey:@"_name"];
+        [categories setObject:categoryForKey forKey:categoryKey];
     }
-    NSArray <UIKeyboardEmoji *> *emojiForType = categoryForType.emoji;
-    if (emojiForType.count)
-        return categoryForType;
+    NSArray <UIKeyboardEmoji *> *emojiForKey = categoryForKey.emoji;
+    if (emojiForKey.count)
+        return categoryForKey;
     if (categoryType > CATEGORIES_COUNT)
         return nil;
     NSArray <NSString *> *emojiArray = [PSEmojiUtilities PrepolulatedEmoji];
@@ -42,8 +40,8 @@
         case 0: {
             NSMutableArray <UIKeyboardEmoji *> *recents = [(UIKeyboardLayoutEmoji *)[self valueForKey:@"emojiController"] recents]; // ?
             if (recents) {
-                categoryForType.emoji = recents;
-                return categoryForType;
+                categoryForKey.emoji = recents;
+                return categoryForKey;
             }
             break;
         }
@@ -75,8 +73,8 @@
     NSMutableArray <UIKeyboardEmoji *> *_emojiArray = [NSMutableArray arrayWithCapacity:emojiArray.count];
     for (NSString *emojiString in emojiArray)
         [PSEmojiUtilities addEmoji:_emojiArray emojiString:emojiString];
-    categoryForType.emoji = _emojiArray;
-    return categoryForType;
+    categoryForKey.emoji = _emojiArray;
+    return categoryForKey;
 }
 
 %end
@@ -94,3 +92,7 @@
 }
 
 %end
+
+%ctor {
+    %init;
+}

@@ -74,7 +74,7 @@
 }
 
 - (UIKeyboardEmoji *)emojiFromVariant:(NSInteger)variant {
-    return [PSEmojiUtilities emojiWithString:[PSEmojiUtilities skinToneVariant:self->_emojiString baseFirst:nil base:nil skin:[PSEmojiUtilities skinModifiers][variant - 1]]];
+    return [PSEmojiUtilities emojiWithString:[PSEmojiUtilities skinToneVariant:self->_emojiString baseFirst:nil base:nil skin:[[PSEmojiUtilities skinModifiers] objectAtIndex:variant - 1]]];
 }
 
 - (void)emojiUsedInVariant:(NSInteger)variant {

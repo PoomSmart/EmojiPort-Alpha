@@ -5,8 +5,7 @@ extern "C" NSString *UIKeyboardGetCurrentInputMode();
 
 static CGFloat getHeight(NSString *name, CGFloat l, CGFloat p, CGFloat padL, CGFloat padP) {
     CGFloat height = 0.0;
-    HBLogDebug(@"%@", name);
-    BOOL isLandscape = [name rangeOfString:@"Landscape"].location != NSNotFound || [name rangeOfString:@"3587139855"].location != NSNotFound;
+    BOOL isLandscape = [name rangeOfString:@"Landscape"].location != NSNotFound;
     // 3.5, 4-inches iDevices or iPad
     if (IS_IPAD)
         height = isLandscape ? padL : padP;
@@ -35,7 +34,10 @@ NSArray *extraIcons() {
 
 
 NSString *keyboardName() {
-    return [UIKeyboardImpl.activeInstance _layout].keyplane.name;
+    UIKeyboardLayout *layout = [UIKeyboardImpl.activeInstance _layout];
+    if ([layout isKindOfClass:NSClassFromString(@"UIKeyboardLayoutEmoji")])
+        return [NSClassFromString(@"UIKeyboardLayoutEmoji") isLandscape] ? @"EmojiKeyboardLandscape" : @"EmojiKeyboard";
+    return nil;
 }
 
 BOOL isEmojiInput() {
