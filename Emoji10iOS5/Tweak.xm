@@ -2,9 +2,7 @@
 #import "../../EmojiLibrary/Header.h"
 #import <CoreFoundation/CoreFoundation.h>
 #import <CoreText/CoreText.h>
-#import "../../Emoji10Legacy/EmojiHUD.h"
-#import "../../Emoji10Legacy/KBResize.x"
-#import "../../Emoji10Legacy/Header.h"
+#import "../EmojiHUD.h"
 
 %hook UIKeyboardEmoji
 
@@ -23,7 +21,7 @@
 
 %hook UIKeyboardEmojiCategoryController
 
-+ (UIKeyboardEmojiCategory *)categoryForKey: (NSString *)categoryKey {
+- (UIKeyboardEmojiCategory *)categoryForKey: (NSString *)categoryKey {
     NSMutableDictionary <NSString *, UIKeyboardEmojiCategory *> *categories = [self valueForKey:@"categories"];
     NSInteger categoryType = [[NSClassFromString(@"UIKeyboardEmojiCategory") categoriesMap] indexOfObject:categoryKey];
     if (categoryType == NSNotFound)

@@ -1,4 +1,4 @@
-#import "../Emoji10Legacy/EmojiHUD.h"
+#import "EmojiHUD.h"
 
 BOOL from;
 NSTimer *__showHUD;

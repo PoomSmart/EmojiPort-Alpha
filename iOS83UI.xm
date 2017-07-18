@@ -2,7 +2,6 @@
 #import "../EmojiLibrary/Header.h"
 #import "../Emoji10Legacy/Header.h"
 #import "../PSHeader/Misc.h"
-//#import <UIKit/UIKBRenderTraits.h>
 #import <substrate.h>
 
 @interface UIKeyboardEmojiScrollView (iOS83UI)
@@ -14,7 +13,7 @@ BOOL enabled;
 
 void configureScrollView(UIKeyboardEmojiScrollView *self, CGRect frame) {
     if (enabled && self._mycategoryLabel == nil) {
-        NSInteger orientation = [UIKeyboardImpl.activeInstance interfaceOrientation];
+        NSInteger orientation = MSHookIvar<NSInteger>(UIKeyboardImpl.activeInstance, "m_orientation");
         CGPoint margin = [NSClassFromString(@"UIKeyboardEmojiGraphics") margin:orientation == 1 || orientation == 2];
         self._mycategoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(margin.x, 0, frame.size.width / 2, IS_IPAD ? 44.0 : 21.0)];
         self._mycategoryLabel.alpha = 0.4;
@@ -75,7 +74,7 @@ void configureScrollView(UIKeyboardEmojiScrollView *self, CGRect frame) {
 %ctor {
     dlopen("/Library/MobileSubstrate/DynamicLibraries/EmojiLayout.dylib", RTLD_LAZY);
     dlopen("/Library/MobileSubstrate/DynamicLibraries/EmojiLocalization.dylib", RTLD_LAZY);
-    id r = [NSDictionary dictionaryWithContentsOfFile:realPrefPath(@"com.PS.Emoji10Alpha")][@"enabled"];
+    id r = [[NSDictionary dictionaryWithContentsOfFile:realPrefPath(@"com.PS.Emoji10Alpha")] objectForKey:@"enabled"];
     enabled = r ? [r boolValue] : YES;
     %init;
 }
