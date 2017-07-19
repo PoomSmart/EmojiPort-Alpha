@@ -1,6 +1,5 @@
 #import "../EmojiLibrary/Header.h"
 #import "../EmojiLibrary/PSEmojiUtilities.h"
-#import "../PSHeader/Misc.h"
 
 extern NSString *UIKBEmojiDivider;
 extern NSString *UIKBEmojiDarkDivider;

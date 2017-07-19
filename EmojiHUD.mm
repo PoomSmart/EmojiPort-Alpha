@@ -64,8 +64,7 @@
     if (!emoji || !emoji.emojiString.length)
         return;
     UIKeyboardLayoutEmoji *layout = (UIKeyboardLayoutEmoji *)[NSClassFromString(@"UIKeyboardLayoutEmoji") emojiLayout];
-    UIKeyboardEmojiRecentsController *controller(MSHookIvar<UIKeyboardEmojiRecentsController *>(layout, "_recentsController"));
-    [controller emojiUsed:emoji];
+    [layout emojiSelected:emoji];
     [self hide];
 }
 
