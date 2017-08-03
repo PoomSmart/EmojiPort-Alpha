@@ -22,7 +22,7 @@
 - (UIKeyboardEmojiCategory *)categoryForKey: (NSString *)categoryKey {
     NSMutableDictionary <NSString *, UIKeyboardEmojiCategory *> *categories = [self valueForKey:@"categories"];
     NSInteger categoryType = [[NSClassFromString(@"UIKeyboardEmojiCategory") categoriesMap] indexOfObject:categoryKey];
-    if (categoryType == NSNotFound)
+    if (categoryType == NSNotFound || categoryType > CATEGORIES_COUNT)
         return nil;
     UIKeyboardEmojiCategory *categoryForKey = [categories objectForKey:categoryKey];
     if (categoryForKey == nil) {
@@ -33,8 +33,6 @@
     NSArray <UIKeyboardEmoji *> *emojiForKey = categoryForKey.emoji;
     if (emojiForKey.count)
         return categoryForKey;
-    if (categoryType > CATEGORIES_COUNT)
-        return nil;
     NSArray <NSString *> *emojiArray = [PSEmojiUtilities PrepolulatedEmoji];
     switch (categoryType) {
         case 0: {

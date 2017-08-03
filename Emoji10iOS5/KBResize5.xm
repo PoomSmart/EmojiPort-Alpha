@@ -18,10 +18,6 @@ static CGFloat getKeyboardHeight(NSInteger orientation) {
     return getHeight(orientation, 162.0, 253.0, 398.0, 313.0);
 }
 
-/*static CGFloat getScrollViewHeight(NSInteger orientation) {
-    return getKeyboardHeight(orientation) - getBarHeight(orientation);
-   }*/
-
 BOOL isEmojiInput() {
     return [UIKeyboardGetCurrentInputMode() isEqualToString:@"emoji@sw=Emoji"];
 }

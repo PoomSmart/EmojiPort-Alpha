@@ -9,8 +9,8 @@ UIImage *egImage(CGRect frame, NSString *imageName, BOOL pressed) {
     return [NSClassFromString(@"UIKeyboardEmojiGraphics") imageWithRect:frame name:imageName pressed:pressed];
 }
 
-NSMutableArray *emojiCategoryBarImages(CGRect frame, BOOL pressed) {
-    NSMutableArray *array = [NSMutableArray array];
+NSMutableArray <UIImage *> *emojiCategoryBarImages(CGRect frame, BOOL pressed) {
+    NSMutableArray <UIImage *> *array = [NSMutableArray array];
     [array addObject:egImage(frame, @"categoryRecents", pressed)];
     [array addObject:egImage(frame, @"categoryPeople", pressed)];
     [array addObject:egImage(frame, @"categoryNature", pressed)];
@@ -25,7 +25,6 @@ NSMutableArray *emojiCategoryBarImages(CGRect frame, BOOL pressed) {
 
 %hook UIKeyboardEmojiCategoriesControl_iPhone
 
-// Adjustment for segments and dividers in case categories count > default
 - (void)layoutSubviews {
     %orig;
     for (UIImageView *divider in MSHookIvar<NSMutableArray *>(self, "_dividerViews"))
@@ -62,26 +61,24 @@ NSMutableArray *emojiCategoryBarImages(CGRect frame, BOOL pressed) {
     MSHookIvar<NSInteger>(self, "_total") = unselectedImagesCount;
     MSHookIvar<NSMutableArray *>(self, "_segmentViews") = [[NSMutableArray alloc] initWithCapacity:MSHookIvar<NSInteger>(self, "_total")];
     MSHookIvar<NSMutableArray *>(self, "_dividerViews") = [[NSMutableArray alloc] initWithCapacity:MSHookIvar<NSInteger>(self, "_total") + 1];
-    if (MSHookIvar<NSInteger>(self, "_total") > 0) {
+    if (MSHookIvar<NSInteger>(self, "_total")) {
         NSUInteger i = 0;
         do {
             UIImageView *unselectedImageView = [[UIImageView alloc] initWithImage:[MSHookIvar<NSArray *>(self, "_unselectedImages") objectAtIndex:i]];
             [self addSubview:unselectedImageView];
             [MSHookIvar<NSMutableArray *>(self, "_segmentViews") insertObject:unselectedImageView atIndex:i];
             [unselectedImageView release];
-            ++i;
-        } while (i < MSHookIvar<NSInteger>(self, "_total"));
+        } while (++i < MSHookIvar<NSInteger>(self, "_total"));
     }
-    if (MSHookIvar<NSInteger>(self, "_total") > 0) {
+    if (MSHookIvar<NSInteger>(self, "_total")) {
         NSUInteger j = 0;
         do {
-            UIImage *dividerImage = (j > 0 && j < MSHookIvar<NSInteger>(self, "_total")) ? MSHookIvar<UIImage *>(self, "_plainDivider") : MSHookIvar<UIImage *>(self, "_darkDivider");
+            UIImage *dividerImage = (j && j < MSHookIvar<NSInteger>(self, "_total")) ? MSHookIvar<UIImage *>(self, "_plainDivider") : MSHookIvar<UIImage *>(self, "_darkDivider");
             UIImageView *dividerImageView = [[UIImageView alloc] initWithImage:dividerImage];
             [self addSubview:dividerImageView];
             [MSHookIvar<NSMutableArray *>(self, "_dividerViews") insertObject:dividerImageView atIndex:j];
             [dividerImageView release];
-            ++j;
-        } while (j - 1 < MSHookIvar<NSInteger>(self, "_total"));
+        } while (++j - 1 < MSHookIvar<NSInteger>(self, "_total"));
     }
     [self updateSegmentAndDividers:MSHookIvar < int > (self, "_selected")];
 }
