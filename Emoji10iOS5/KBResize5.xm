@@ -1,21 +1,15 @@
 #import "../../EmojiLibrary/Header.h"
+#import "../../EmojiLayout/PSEmojiLayout.h"
 #import "../../PSHeader/Misc.h"
 
 extern "C" NSString *UIKeyboardGetCurrentInputMode();
 
-static CGFloat getHeight(NSInteger orientation, CGFloat l, CGFloat p, CGFloat padL, CGFloat padP) {
-    BOOL isLandscape = orientation == 3 || orientation == 4;
-    if (IS_IPAD)
-        return isLandscape ? padL : padP;
-    return isLandscape ? l : p;
-}
-
-static CGFloat getBarHeight(NSInteger orientation) {
-    return getHeight(orientation, 32.0, 40.0, 56.0, 56.0);
-}
-
 static CGFloat getKeyboardHeight(NSInteger orientation) {
-    return getHeight(orientation, 162.0, 253.0, 398.0, 313.0);
+    return [SoftPSEmojiLayout keyboardHeight:(orientation == 3 || orientation == 4) ? @"Landscape" : @""];
+}
+
+static CGFloat getBarHeight() {
+    return [SoftPSEmojiLayout barHeight:[NSClassFromString(@"UIKeyboardLayoutEmoji") isLandscape] ? @"Landscape" : @""];
 }
 
 BOOL isEmojiInput() {
@@ -37,13 +31,13 @@ BOOL isEmojiInput() {
 
 - (CGSize)leftControlSize {
     CGSize size = %orig;
-    size.height = getBarHeight([NSClassFromString(@"UIKeyboardLayoutEmoji") isLandscape] ? 3 : 1);
+    size.height = getBarHeight();
     return size;
 }
 
 - (CGSize)rightControlSize {
     CGSize size = %orig;
-    size.height = getBarHeight([NSClassFromString(@"UIKeyboardLayoutEmoji") isLandscape] ? 3 : 1);
+    size.height = getBarHeight();
     return size;
 }
 
@@ -53,7 +47,7 @@ BOOL isEmojiInput() {
 
 - (CGSize)rightControlSize {
     CGSize size = %orig;
-    size.height = getBarHeight([NSClassFromString(@"UIKeyboardLayoutEmoji") isLandscape] ? 3 : 1);
+    size.height = getBarHeight();
     return size;
 }
 
