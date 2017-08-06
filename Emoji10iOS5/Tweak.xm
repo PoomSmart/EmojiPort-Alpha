@@ -25,24 +25,14 @@
     if (categoryType == NSNotFound || categoryType > CATEGORIES_COUNT)
         return nil;
     UIKeyboardEmojiCategory *categoryForKey = [categories objectForKey:categoryKey];
-    if (categoryForKey == nil) {
-        categoryForKey = [[[NSClassFromString(@"UIKeyboardEmojiCategory") alloc] init] autorelease];
-        [categoryForKey setValue:categoryKey forKey:@"_name"];
-        [categories setObject:categoryForKey forKey:categoryKey];
-    }
     NSArray <UIKeyboardEmoji *> *emojiForKey = categoryForKey.emoji;
     if (emojiForKey.count)
         return categoryForKey;
     NSArray <NSString *> *emojiArray = [PSEmojiUtilities PrepolulatedEmoji];
     switch (categoryType) {
-        case 0: {
-            NSMutableArray <UIKeyboardEmoji *> *recents = [(UIKeyboardLayoutEmoji *)[self valueForKey:@"emojiController"] recents]; // ?
-            if (recents) {
-                categoryForKey.emoji = recents;
-                return categoryForKey;
-            }
+        case 0:
+            emojiArray = nil;
             break;
-        }
         case 1:
             emojiArray = [PSEmojiUtilities PeopleEmoji];
             break;
@@ -68,10 +58,19 @@
             emojiArray = [PSEmojiUtilities FlagsEmoji];
             break;
     }
-    NSMutableArray <UIKeyboardEmoji *> *_emojiArray = [NSMutableArray arrayWithCapacity:emojiArray.count];
+    NSMutableArray <UIKeyboardEmoji *> *_emojiArray = emojiArray ? [NSMutableArray arrayWithCapacity:emojiArray.count] : [[(UIKeyboardLayoutEmoji *)[self valueForKey:@"emojiController"] recents] retain];
     for (NSString *emojiString in emojiArray)
         [PSEmojiUtilities addEmoji:_emojiArray emojiString:emojiString];
-    categoryForKey.emoji = _emojiArray;
+    if (categoryForKey == nil) {
+        categoryForKey = [[[NSClassFromString(@"UIKeyboardEmojiCategory") alloc] init] autorelease];
+        [categoryForKey setValue:categoryKey forKey:@"_name"];
+        categoryForKey.emoji = _emojiArray;
+        [categories setObject:categoryForKey forKey:categoryKey];
+    }
+    NSDictionary <NSString *, NSDictionary *> *defaultsData = [self valueForKey:@"_defaultsData"];
+    NSDictionary <NSString *, NSNumber *> *categoryDefaults = [defaultsData objectForKey:categoryKey];
+    if (categoryDefaults)
+        categoryForKey.lastViewedPage = [[categoryDefaults objectForKey:@"LastViewedPageKey"] intValue];
     return categoryForKey;
 }
 

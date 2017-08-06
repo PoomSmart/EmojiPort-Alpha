@@ -43,15 +43,16 @@ NSMutableArray <UIImage *> *emojiCategoryBarImages(CGRect frame, BOOL pressed) {
     [self releaseImagesAndViews];
     NSUInteger numberOfCategories = CATEGORIES_COUNT;
     CGRect barFrame = self.frame;
+    CGRect categoryFrame = [[NSClassFromString(@"UIKeyboardLayoutEmoji") emojiLayout] categoryFrame];
     CGFloat dividerWidth = 1.0;
     CGFloat barWidth = barFrame.size.width;
-    barFrame.size.width = (barWidth - (numberOfCategories + 1) * dividerWidth) / numberOfCategories;
+    categoryFrame.size.width = barFrame.size.width = (barWidth - (numberOfCategories + 1) * dividerWidth) / numberOfCategories;
     NSArray <UIImage *> *unselectedImages(MSHookIvar<NSArray *>(self, "_unselectedImages"));
     [unselectedImages release];
     NSArray <UIImage *> *selectedImages(MSHookIvar<NSArray *>(self, "_selectedImages"));
     [selectedImages release];
-    MSHookIvar<NSArray *>(self, "_unselectedImages") = [emojiCategoryBarImages(barFrame, NO) retain];
-    MSHookIvar<NSArray *>(self, "_selectedImages") = [emojiCategoryBarImages(barFrame, YES) retain];
+    MSHookIvar<NSArray *>(self, "_unselectedImages") = [emojiCategoryBarImages(categoryFrame, NO) retain];
+    MSHookIvar<NSArray *>(self, "_selectedImages") = [emojiCategoryBarImages(categoryFrame, YES) retain];
     CGFloat barHeight = barFrame.size.height;
     CGPoint origin = barFrame.origin;
     MSHookIvar<UIImage *>(self, "_plainDivider") = [egImage(CGRectMake(origin.x, origin.y, dividerWidth, barHeight), UIKBEmojiDivider, NO) retain];
@@ -66,7 +67,7 @@ NSMutableArray <UIImage *> *emojiCategoryBarImages(CGRect frame, BOOL pressed) {
         do {
             UIImageView *unselectedImageView = [[UIImageView alloc] initWithImage:[MSHookIvar<NSArray *>(self, "_unselectedImages") objectAtIndex:i]];
             [self addSubview:unselectedImageView];
-            [MSHookIvar<NSMutableArray *>(self, "_segmentViews") insertObject:unselectedImageView atIndex:i];
+            [MSHookIvar < NSMutableArray *> (self, "_segmentViews") insertObject:unselectedImageView atIndex:i];
             [unselectedImageView release];
         } while (++i < MSHookIvar<NSInteger>(self, "_total"));
     }
