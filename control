@@ -2,7 +2,6 @@ Package: com.ps.emojiportalpha
 Name: EmojiPort (iOS 5.1) [Beta]
 Depends: mobilesubstrate, preferenceloader, firmware (>= 5.1), firmware (<< 6.0), com.ps.emojilayout, com.ps.emojiattributes, com.ps.emojilocalization, com.ps.emojilibrary
 Conflicts: com.ps.emojiportalpha
-Replaces: com.ps.emoji10alpha
 Version: 1.0.0
 Architecture: iphoneos-arm
 Description: Latest emojis for iOS 5.1
