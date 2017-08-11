@@ -4,5 +4,5 @@ echo "Wiping keyboard caches..."
 rm -rf /private/var/mobile/Library/Caches/com.apple.keyboards
 rm -rf /private/var/root/Library/Caches/com.apple.keyboards
 
-echo "IMPORTANT: If after installation emojis don't display correctly, restore the original emoji font(s)."
+echo "IMPORTANT: If after uninstallation emojis don't display correctly, restore the original emoji font(s)."
 echo "Done."

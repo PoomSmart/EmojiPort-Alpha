@@ -30,31 +30,31 @@
         return categoryForKey;
     NSArray <NSString *> *emojiArray = [PSEmojiUtilities PrepolulatedEmoji];
     switch (categoryType) {
-        case 0:
+        case IDXPSEmojiCategoryRecent:
             emojiArray = nil;
             break;
-        case 1:
+        case IDXPSEmojiCategoryPeople:
             emojiArray = [PSEmojiUtilities PeopleEmoji];
             break;
-        case 2:
+        case IDXPSEmojiCategoryNature:
             emojiArray = [PSEmojiUtilities NatureEmoji];
             break;
-        case 3:
+        case IDXPSEmojiCategoryFoodAndDrink:
             emojiArray = [PSEmojiUtilities FoodAndDrinkEmoji];
             break;
-        case 4:
+        case IDXPSEmojiCategoryActivity:
             emojiArray = [PSEmojiUtilities ActivityEmoji];
             break;
-        case 5:
+        case IDXPSEmojiCategoryTravelAndPlaces:
             emojiArray = [PSEmojiUtilities TravelAndPlacesEmoji];
             break;
-        case 6:
+        case IDXPSEmojiCategoryObjects:
             emojiArray = [PSEmojiUtilities ObjectsEmoji];
             break;
-        case 7:
+        case IDXPSEmojiCategorySymbols:
             emojiArray = [PSEmojiUtilities SymbolsEmoji];
             break;
-        case 8:
+        case IDXPSEmojiCategoryFlags:
             emojiArray = [PSEmojiUtilities FlagsEmoji];
             break;
     }

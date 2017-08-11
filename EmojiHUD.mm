@@ -1,5 +1,6 @@
 #import "EmojiHUD.h"
 #import "../EmojiLibrary/PSEmojiUtilities.h"
+#import <UIKit/UIKeyboard.h>
 #import <substrate.h>
 
 @implementation EmojiHUD
@@ -7,13 +8,13 @@
 @synthesize showing = _showing;
 
 + (CGRect)hudFrame {
-    CGFloat width = IS_IPAD ? 300 : 260;
-    CGFloat height = IS_IPAD ? 55 : 40;
+    CGFloat width = IS_IPAD ? 300.0 : 260.0;
+    CGFloat height = IS_IPAD ? 55.0 : 40.0;
     CGRect bounds = UIScreen.mainScreen.bounds;
     CGFloat x = (bounds.size.width - width) / 2;
     CGFloat y = (bounds.size.height - height) / 2;
-    if (IS_IPAD && bounds.size.height > 768)
-        y += 140;
+    if (IS_IPAD && bounds.size.height > 768.0)
+        y += 140.0;
     return CGRectMake(x, y, width, height);
 }
 
@@ -38,8 +39,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.opaque = NO;
-        self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
-        self.layer.cornerRadius = 12;
+        self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+        self.layer.cornerRadius = 12.0;
     }
     return self;
 }
@@ -87,11 +88,11 @@
     CGFloat totalWidth = self.frame.size.width;
     CGFloat section = totalWidth / 5.0;
     CGFloat vf = touchLocation.x / section;
-    #if __LP64__
+#if __LP64__
     NSInteger variant = (NSInteger)ceil(vf);
-    #else
+#else
     NSInteger variant = (NSInteger)ceilf(vf);
-    #endif
+#endif
     [self emojiUsedInVariant:variant];
 }
 

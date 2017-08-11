@@ -10,7 +10,7 @@
 
 void setLabelFrame(UILabel *categoryLabel, CGRect frame) {
     CGPoint margin = [NSClassFromString(@"UIKeyboardEmojiGraphics") margin:![NSClassFromString(@"UIKeyboardLayoutEmoji") isLandscape]];
-    categoryLabel.frame = CGRectMake(margin.x, 0, frame.size.width / 2, LABEL_HEIGHT);
+    categoryLabel.frame = CGRectMake(margin.x, 0.0, frame.size.width / 2, LABEL_HEIGHT);
 }
 
 void configureScrollView(UIKeyboardEmojiScrollView *self, CGRect frame) {
