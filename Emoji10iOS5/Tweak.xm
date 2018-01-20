@@ -21,7 +21,7 @@
 
 - (UIKeyboardEmojiCategory *)categoryForKey: (NSString *)categoryKey {
     NSMutableDictionary <NSString *, UIKeyboardEmojiCategory *> *categories = [self valueForKey:@"categories"];
-    NSInteger categoryType = [[NSClassFromString(@"UIKeyboardEmojiCategory") categoriesMap] indexOfObject:categoryKey];
+    PSEmojiCategory categoryType = [[NSClassFromString(@"UIKeyboardEmojiCategory") categoriesMap] indexOfObject:categoryKey];
     if (categoryType == NSNotFound || categoryType > CATEGORIES_COUNT)
         return nil;
     UIKeyboardEmojiCategory *categoryForKey = [categories objectForKey:categoryKey];

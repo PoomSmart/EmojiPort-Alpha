@@ -15,16 +15,13 @@ void clearTimer() {
 
 %new
 - (void)_showHUD {
-    EmojiHUD *hud = EmojiHUD.sharedInstance;
-    if (hud) {
-        if (hud.showing)
-            [hud hide];
-        else {
-            from = YES;
-            [self touchCancelled:[self activeTouch]];
-            from = NO;
-            [hud showWithEmojiView:_emojiView];
-        }
+    if (EmojiHUD.sharedInstance.showing)
+        [EmojiHUD.sharedInstance hide];
+    else {
+        from = YES;
+        [self touchCancelled:[self activeTouch]];
+        from = NO;
+        [EmojiHUD.sharedInstance showWithEmojiView:_emojiView];
     }
 }
 

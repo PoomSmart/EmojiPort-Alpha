@@ -37,11 +37,9 @@
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if (self) {
-        self.opaque = NO;
-        self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        self.layer.cornerRadius = 12.0;
-    }
+    self.opaque = NO;
+    self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    self.layer.cornerRadius = 12.0;
     return self;
 }
 
@@ -64,8 +62,7 @@
 - (void)emojiUsed:(UIKeyboardEmoji *)emoji {
     if (!emoji || !emoji.emojiString.length)
         return;
-    UIKeyboardLayoutEmoji *layout = (UIKeyboardLayoutEmoji *)[NSClassFromString(@"UIKeyboardLayoutEmoji") emojiLayout];
-    [layout emojiSelected:emoji];
+    [(UIKeyboardLayoutEmoji *)[NSClassFromString(@"UIKeyboardLayoutEmoji") emojiLayout] emojiSelected:emoji];
     [self hide];
 }
 
@@ -74,20 +71,15 @@
 }
 
 - (UIKeyboardEmoji *)emojiFromVariant:(NSInteger)variant {
-    return [PSEmojiUtilities emojiWithString:[PSEmojiUtilities skinToneVariant:self->_emojiString baseFirst:nil base:nil skin:[[PSEmojiUtilities skinModifiers] objectAtIndex:variant - 1]]];
+    return [PSEmojiUtilities emojiWithString:[PSEmojiUtilities skinToneVariant:self->_emojiString skin:[[PSEmojiUtilities skinModifiers] objectAtIndex:variant - 1]]];
 }
 
 - (void)emojiUsedInVariant:(NSInteger)variant {
-    UIKeyboardEmoji *emoji = [self emojiFromVariant:variant];
-    [self emojiUsed:emoji];
+    [self emojiUsed:[self emojiFromVariant:variant]];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint touchLocation = [touch locationInView:touch.view];
-    CGFloat totalWidth = self.frame.size.width;
-    CGFloat section = totalWidth / 5.0;
-    CGFloat vf = touchLocation.x / section;
+    CGFloat vf = [[[event allTouches] anyObject] locationInView:touch.view].x / (self.frame.size.width / 5.0);
 #if __LP64__
     NSInteger variant = (NSInteger)ceil(vf);
 #else
