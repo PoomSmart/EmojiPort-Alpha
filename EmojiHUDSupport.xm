@@ -1,4 +1,4 @@
-#import "EmojiHUD.h"
+#import "../EmojiPort-Legacy/EmojiHUD.h"
 
 BOOL from;
 NSTimer *__showHUD;
@@ -58,13 +58,9 @@ void clearTimer() {
 
 %hook UIKeyboardEmojiCategoriesControl
 
-- (void)touchesBegan: (id)arg1 withEvent: (id)arg2 {
+- (void)touchesBegan:(id)arg1 withEvent:(id)arg2 {
     [EmojiHUD.sharedInstance hide];
     %orig;
 }
 
 %end
-
-%ctor {
-    %init;
-}

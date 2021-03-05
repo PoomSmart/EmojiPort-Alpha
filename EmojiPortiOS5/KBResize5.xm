@@ -52,7 +52,3 @@ BOOL isEmojiInput() {
 }
 
 %end
-
-%ctor {
-    %init;
-}

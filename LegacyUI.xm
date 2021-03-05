@@ -128,7 +128,3 @@ NSMutableArray <UIImage *> *emojiCategoryBarImages(CGRect frame, BOOL pressed) {
 }
 
 %end
-
-%ctor {
-    %init;
-}

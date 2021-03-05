@@ -9,9 +9,9 @@
 		<key>default</key>
 		<true/>
 		<key>defaults</key>
-		<string>com.PS.Emoji10Alpha</string>
+		<string>com.PS.EmojiPortAlpha</string>
 		<key>icon</key>
-		<string>Emoji10Alpha.png</string>
+		<string>EmojiPortAlpha.png</string>
 		<key>key</key>
 		<string>enabled</string>
 		<key>label</key>

@@ -1,4 +1,6 @@
 #import "../EmojiLibrary/Header.h"
+#import "../PSHeader/Misc.h"
+#import <theos/IOSMacros.h>
 #import <substrate.h>
 
 @interface UIKeyboardEmojiScrollView (iOS83UI)
@@ -18,7 +20,7 @@ void configureScrollView(UIKeyboardEmojiScrollView *self, CGRect frame) {
     MSHookIvar<UILabel *>(self, "_categoryLabel").font = [UIFont boldSystemFontOfSize:FONT_SIZE];
     MSHookIvar<UILabel *>(self, "_categoryLabel").backgroundColor = UIColor.clearColor;
     MSHookIvar<UILabel *>(self, "_categoryLabel").textAlignment = NSTextAlignmentLeft;
-    [self updateLabel:MSHookIvar < UIKeyboardEmojiCategory *> (self, "_category").name];
+    [self updateLabel:MSHookIvar<UIKeyboardEmojiCategory *>(self, "_category").name];
     setLabelFrame(MSHookIvar<UILabel *>(self, "_categoryLabel"), frame);
 }
 
@@ -80,11 +82,9 @@ void configureScrollView(UIKeyboardEmojiScrollView *self, CGRect frame) {
 %end
 
 %ctor {
-    id r = [[NSDictionary dictionaryWithContentsOfFile:realPrefPath(@"com.PS.Emoji10Alpha")] objectForKey:@"enabled"];
+    id r = [[NSDictionary dictionaryWithContentsOfFile:realPrefPath(@"com.PS.EmojiPortAlpha")] objectForKey:@"enabled"];
     BOOL enabled = r ? [r boolValue] : YES;
     if (enabled) {
-        dlopen("/Library/MobileSubstrate/DynamicLibraries/EmojiLayout.dylib", RTLD_LAZY);
-        dlopen("/Library/MobileSubstrate/DynamicLibraries/EmojiLocalization.dylib", RTLD_LAZY);
         %init;
     }
 }

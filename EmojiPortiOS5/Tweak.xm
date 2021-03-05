@@ -1,6 +1,5 @@
 #import "../../EmojiLibrary/PSEmojiUtilities.h"
 #import "../../EmojiLibrary/Header.h"
-#import "../EmojiHUD.h"
 
 %hook UIKeyboardEmoji
 
@@ -11,7 +10,7 @@
 %hook UIKeyboardEmojiCategory
 
 %new
-+ (BOOL)emojiString: (NSString *)emojiString inGroup: (NSArray <NSString *> *)group {
++ (BOOL)emojiString:(NSString *)emojiString inGroup:(NSArray <NSString *> *)group {
     return [PSEmojiUtilities emojiString:emojiString inGroup:group];
 }
 
@@ -89,7 +88,3 @@
 }
 
 %end
-
-%ctor {
-    %init;
-}
