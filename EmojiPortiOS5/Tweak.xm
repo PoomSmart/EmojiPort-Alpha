@@ -18,7 +18,7 @@
 
 %hook UIKeyboardEmojiCategoryController
 
-- (UIKeyboardEmojiCategory *)categoryForKey: (NSString *)categoryKey {
+- (UIKeyboardEmojiCategory *)categoryForKey:(NSString *)categoryKey {
     NSMutableDictionary <NSString *, UIKeyboardEmojiCategory *> *categories = [self valueForKey:@"categories"];
     PSEmojiCategory categoryType = [[NSClassFromString(@"UIKeyboardEmojiCategory") categoriesMap] indexOfObject:categoryKey];
     if (categoryType == NSNotFound || categoryType > CATEGORIES_COUNT)

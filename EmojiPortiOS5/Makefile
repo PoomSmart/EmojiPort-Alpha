@@ -4,7 +4,7 @@ ARCHS = armv7
 include $(THEOS)/makefiles/common.mk
 
 LIBRARY_NAME = EmojiPortiOS5
-EmojiPortiOS5_INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries/Emoji10Alpha
+EmojiPortiOS5_INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries/EmojiPort
 EmojiPortiOS5_FILES = ../../EmojiPort-Legacy/EmojiHUD.mm ../EmojiHUDSupport.xm ../LegacyUI.xm ../iOS83UI.xm KBResize5.xm Tweak.xm
 EmojiPortiOS5_FRAMEWORKS = UIKit Foundation CoreGraphics
 EmojiPortiOS5_EXTRA_FRAMEWORKS = CydiaSubstrate

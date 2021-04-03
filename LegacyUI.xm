@@ -88,7 +88,7 @@ NSMutableArray <UIImage *> *emojiCategoryBarImages(CGRect frame, BOOL pressed) {
 
 %hook UIKeyboardEmojiGraphics
 
-- (UIImage *)categoryRecentsGenerator: (id)pressed {
+- (UIImage *)categoryRecentsGenerator:(id)pressed {
     return [self categoryWithSymbol:@"🕘" pressed:pressed];
 }
 
@@ -113,17 +113,17 @@ NSMutableArray <UIImage *> *emojiCategoryBarImages(CGRect frame, BOOL pressed) {
 }
 
 %new
-- (UIImage *)categoryActivityGenerator: (id)pressed {
+- (UIImage *)categoryActivityGenerator:(id)pressed {
     return [self categoryWithSymbol:@"⚽️" pressed:pressed];
 }
 
 %new
-- (UIImage *)categoryFoodAndDrinkGenerator: (id)pressed {
+- (UIImage *)categoryFoodAndDrinkGenerator:(id)pressed {
     return [self categoryWithSymbol:@"🍔" pressed:pressed];
 }
 
 %new
-- (UIImage *)categoryFlagsGenerator: (id)pressed {
+- (UIImage *)categoryFlagsGenerator:(id)pressed {
     return [self categoryWithSymbol:@"🏳" pressed:pressed];
 }
 

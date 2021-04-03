@@ -4,9 +4,9 @@
 
 %ctor {
     if (isTarget(TargetTypeApps)) {
-        dlopen("/Library/MobileSubstrate/DynamicLibraries/EmojiLayout.dylib", RTLD_NOW);
-        dlopen("/Library/MobileSubstrate/DynamicLibraries/EmojiLocalization.dylib", RTLD_NOW);
-        dlopen("/Library/MobileSubstrate/DynamicLibraries/EmojiAttributes/EmojiAttributes.dylib", RTLD_NOW);
-        dlopen("/Library/MobileSubstrate/DynamicLibraries/EmojiPortAlpha/EmojiPortiOS5.dylib", RTLD_NOW);
+        dlopen("/Library/MobileSubstrate/DynamicLibraries/EmojiPort/EmojiLayout.dylib", RTLD_NOW);
+        dlopen("/Library/MobileSubstrate/DynamicLibraries/EmojiPort/EmojiLocalization.dylib", RTLD_NOW);
+        dlopen("/Library/MobileSubstrate/DynamicLibraries/EmojiPort/EmojiAttributes.dylib", RTLD_NOW);
+        dlopen("/Library/MobileSubstrate/DynamicLibraries/EmojiPort/EmojiPortiOS5.dylib", RTLD_NOW);
     }
 }
