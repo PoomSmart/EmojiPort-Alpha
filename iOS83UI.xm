@@ -1,5 +1,5 @@
-#import "../EmojiLibrary/Header.h"
-#import "../PSHeader/Misc.h"
+#import <EmojiLibrary/Header.h>
+#import <PSHeader/Misc.h>
 #import <theos/IOSMacros.h>
 #import <substrate.h>
 
@@ -16,12 +16,13 @@ void setLabelFrame(UILabel *categoryLabel, CGRect frame) {
 }
 
 void configureScrollView(UIKeyboardEmojiScrollView *self, CGRect frame) {
-    MSHookIvar<UILabel *>(self, "_categoryLabel").alpha = 0.4;
-    MSHookIvar<UILabel *>(self, "_categoryLabel").font = [UIFont boldSystemFontOfSize:FONT_SIZE];
-    MSHookIvar<UILabel *>(self, "_categoryLabel").backgroundColor = UIColor.clearColor;
-    MSHookIvar<UILabel *>(self, "_categoryLabel").textAlignment = NSTextAlignmentLeft;
+    UILabel *label = MSHookIvar<UILabel *>(self, "_categoryLabel");
+    label.alpha = 0.4;
+    label.font = [UIFont boldSystemFontOfSize:FONT_SIZE];
+    label.backgroundColor = UIColor.clearColor;
+    label.textAlignment = NSTextAlignmentLeft;
     [self updateLabel:MSHookIvar<UIKeyboardEmojiCategory *>(self, "_category").name];
-    setLabelFrame(MSHookIvar<UILabel *>(self, "_categoryLabel"), frame);
+    setLabelFrame(label, frame);
 }
 
 %hook PSEmojiLayout
@@ -35,7 +36,7 @@ void configureScrollView(UIKeyboardEmojiScrollView *self, CGRect frame) {
 %hook UIKeyboardEmojiCategory
 
 - (NSString *)displayName {
-    return stringEqual(self.name, @"UIKeyboardEmojiCategoryRecents") ? [NSClassFromString(@"UIKeyboardLayoutEmoji") localizedStringForKey:@"RECENTS_TITLE"] : %orig;
+    return NSStringEqual(self.name, @"UIKeyboardEmojiCategoryRecents") ? [NSClassFromString(@"UIKeyboardLayoutEmoji") localizedStringForKey:@"RECENTS_TITLE"] : %orig;
 }
 
 %end

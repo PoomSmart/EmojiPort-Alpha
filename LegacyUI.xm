@@ -1,6 +1,6 @@
-#import "../EmojiLibrary/Header.h"
-#import "../EmojiLibrary/PSEmojiUtilities.h"
-#import "../PSHeader/Misc.h"
+#import <EmojiLibrary/Header.h>
+#import <EmojiLibrary/PSEmojiUtilities.h>
+#import <PSHeader/Misc.h>
 #import "../EmojiPort-Legacy/LegacyUI.h"
 
 extern NSString *UIKBEmojiDivider;
@@ -195,17 +195,17 @@ NSMutableArray <UIImage *> *emojiCategoryBarImages(CGRect frame, BOOL pressed) {
     return [self categoryWithSymbol:@"🔣" pressed:pressed];
 }
 
-%new
+%new(@@:@)
 - (UIImage *)categoryActivityGenerator:(id)pressed {
     return [self categoryWithSymbol:@"⚽️" pressed:pressed];
 }
 
-%new
+%new(@@:@)
 - (UIImage *)categoryFoodAndDrinkGenerator:(id)pressed {
     return [self categoryWithSymbol:@"🍔" pressed:pressed];
 }
 
-%new
+%new(@@:@)
 - (UIImage *)categoryFlagsGenerator:(id)pressed {
     return [self categoryWithSymbol:@"🏳" pressed:pressed];
 }

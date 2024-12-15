@@ -27,7 +27,7 @@
     NSArray <UIKeyboardEmoji *> *emojiForKey = categoryForKey.emoji;
     if (emojiForKey.count)
         return categoryForKey;
-    NSArray <NSString *> *emojiArray = [PSEmojiUtilities PrepolulatedEmoji];
+    NSArray <NSString *> *emojiArray = [PSEmojiUtilities PrepopulatedEmoji];
     switch (categoryType) {
         case IDXPSEmojiCategoryRecent:
             emojiArray = nil;

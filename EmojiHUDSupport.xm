@@ -13,7 +13,7 @@ void clearTimer() {
 
 %hook UIKeyboardEmojiPage
 
-%new
+%new(v@:)
 - (void)_showHUD {
     if (EmojiHUD.sharedInstance.showing)
         [EmojiHUD.sharedInstance hide];
