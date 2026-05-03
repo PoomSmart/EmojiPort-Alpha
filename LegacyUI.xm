@@ -20,7 +20,7 @@ void (*UIKBDrawRoundRectKeyBackground)(CGContextRef, UIKBTree *, UIKBTree *, int
 CGContextRef (*UIKBCreateBitmapContextWithScale)(CGSize size, CGFloat scale);
 
 NSArray <NSString *> *displaySymbolsAsGlyphs() {
-    return @[@"🕘", @"😀", @"🐻", @"🌇", @"💡", @"🔣", @"⚽️", @"🍔", @"🏳"];
+    return @[@"🕘", @"😀", @"🐻", @"🍔", @"⚽️", @"🌇", @"💡", @"🔣", @"🏳"];
 }
 
 UIImage *egImage(CGRect frame, NSString *imageName, BOOL pressed) {
@@ -172,42 +172,42 @@ NSMutableArray <UIImage *> *emojiCategoryBarImages(CGRect frame, BOOL pressed) {
 }
 
 - (UIImage *)categoryRecentsGenerator:(id)pressed {
-    return [self categoryWithSymbol:@"🕘" pressed:pressed];
+    return [self categoryWithSymbol:displaySymbolsAsGlyphs()[0] pressed:pressed];
 }
 
 - (UIImage *)categoryPeopleGenerator:(id)pressed {
-    return [self categoryWithSymbol:@"😀" pressed:pressed];
+    return [self categoryWithSymbol:displaySymbolsAsGlyphs()[1] pressed:pressed];
 }
 
 - (UIImage *)categoryNatureGenerator:(id)pressed {
-    return [self categoryWithSymbol:@"🐻" pressed:pressed];
+    return [self categoryWithSymbol:displaySymbolsAsGlyphs()[2] pressed:pressed];
 }
 
 - (UIImage *)categoryPlacesGenerator:(id)pressed {
-    return [self categoryWithSymbol:@"🌇" pressed:pressed];
+    return [self categoryWithSymbol:displaySymbolsAsGlyphs()[5] pressed:pressed];
 }
 
 - (UIImage *)categoryObjectsGenerator:(id)pressed {
-    return [self categoryWithSymbol:@"💡" pressed:pressed];
+    return [self categoryWithSymbol:displaySymbolsAsGlyphs()[6] pressed:pressed];
 }
 
 - (UIImage *)categorySymbolsGenerator:(id)pressed {
-    return [self categoryWithSymbol:@"🔣" pressed:pressed];
+    return [self categoryWithSymbol:displaySymbolsAsGlyphs()[7] pressed:pressed];
 }
 
 %new(@@:@)
 - (UIImage *)categoryActivityGenerator:(id)pressed {
-    return [self categoryWithSymbol:@"⚽️" pressed:pressed];
+    return [self categoryWithSymbol:displaySymbolsAsGlyphs()[4] pressed:pressed];
 }
 
 %new(@@:@)
 - (UIImage *)categoryFoodAndDrinkGenerator:(id)pressed {
-    return [self categoryWithSymbol:@"🍔" pressed:pressed];
+    return [self categoryWithSymbol:displaySymbolsAsGlyphs()[3] pressed:pressed];
 }
 
 %new(@@:@)
 - (UIImage *)categoryFlagsGenerator:(id)pressed {
-    return [self categoryWithSymbol:@"🏳" pressed:pressed];
+    return [self categoryWithSymbol:displaySymbolsAsGlyphs()[8] pressed:pressed];
 }
 
 %end

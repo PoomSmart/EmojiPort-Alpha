@@ -1,4 +1,4 @@
-EmojiPort Alpha
+EmojiPort (iOS 5.1)
 =============
 
 Latest emojis for iOS 5.1
